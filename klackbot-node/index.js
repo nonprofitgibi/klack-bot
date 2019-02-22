@@ -1,6 +1,12 @@
 let secrets = require('./secrets');
 
+let kafka = require('kafka-node');
 let bunnyslack = require('./bunnyslack');
+
+let client = new kafka.KafkaClient({ kafkaHost: '10.10.114.49:2181' });
+let producer = new kafka.Producer(client, { requireAcks: 1 });
+let consumer = new kafka.Consumer(client, [{ topic: 'slack-message', partition: 0, offset: 0 }], { autoCommit: false, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024 });
+let offset = new kafka.Offset(client);
 
 // global object because reasons
 let G = {
@@ -72,6 +78,21 @@ slacki.on('message', (msg) => {
     });
 });
 
+producer.on('ready', function () {
+
+    console.log('world');
+
+    producer.send([{ topic: 'slack-message', partition: 0, messages: ['tanner is having password issues'], attributes: 0 }],
+        (err, result) => {
+            console.log(err || result);
+            process.exit();
+    });
+});
+
+consumer.on('message', (message) =>  {
+    console.log(message);
+});
+
 let pushtokafka = (payload) => {
     slacki.postMessageToGroup(G.topicname, payload);
 };
@@ -79,3 +100,5 @@ let pushtokafka = (payload) => {
 /*slacki.getGroupHistory('GGCHNUF2T').then((data) => {
     console.log(data);
 });*/
+
+
