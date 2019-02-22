@@ -1,0 +1,29 @@
+{
+  "name": "klack-bot",
+  "version": "1.0.0",
+  "description": "a bot for kafka",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nonprofitgibi/klack-bot.git"
+  },
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/nonprofitgibi/klack-bot/issues"
+  },
+  "homepage": "https://github.com/nonprofitgibi/klack-bot#readme",
+  "dependencies": {
+    "events": "^3.0.0",
+    "extend": "^3.0.2",
+    "kafka-node": "^4.0.1",
+    "lodash": "^4.17.11",
+    "request": "^2.88.0",
+    "vow": "^0.4.18",
+    "ws": "^6.1.3"
+  }
+}
