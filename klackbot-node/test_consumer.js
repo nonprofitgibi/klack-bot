@@ -8,6 +8,7 @@ var argv = require('optimist').argv;
 var topic = argv.topic || 'slack-message';
 
 var client = new Client({ kafaHost: 'velomobile.srvs.cloudkafka.com', sasl: {
+  mechanism: 'plain',
   username: 'po23z7ne',
   password: 'e1wLUMtei8KdWL4h41Q8_70k9KCADHfa'
 } });
